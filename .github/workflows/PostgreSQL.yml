@@ -26,4 +26,4 @@ jobs:
           PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
           PG_DB: ${{ secrets.PG_DB }}
           RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
-        run: bash dump_and_upload.sh
+        run: bash script/dump_and_upload.sh
