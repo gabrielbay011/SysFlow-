@@ -9,6 +9,6 @@ PGPASSWORD="$PG_PASSWORD" pg_dump -h "$PG_HOST" -p "$PG_PORT" -U "$PG_USER" -d "
 mkdir -p ~/.config/rclone
 echo "$RCLONE_CONF" > ~/.config/rclone/rclone.conf
 
-rclone copy "$FILENAME" gdrive:/backups/
+rclone copy "$FILENAME" teste1:/backups/
 
 rm "$FILENAME"
