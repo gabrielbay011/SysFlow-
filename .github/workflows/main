@@ -15,7 +15,7 @@ jobs:
         run: |
         pg_dump -h ${{ PG_HOST }} -p ${{ PG_PORT }} -U ${{ PG_USER }} -d ${{ PG_DB }} -f backup.sql
         env:
-          PGPASSWORD: ${{secrests.PG_PASSWORD}}
+          PGPASSWORD: ${{secrets.PG_PASSWORD}}
 
 
       - name: Upload to gdrive
