@@ -13,7 +13,7 @@ jobs:
 
       - name: Dump SysFlow
         run: |
-        pg_dump -h "$PG_HOST" -p "$PG_PORT" -U "$PG_USER" -d "$PG_DB" 
+        pg_dump -h ${{ PG_HOST }} -p ${{ PG_PORT }} -U ${{ PG_USER }} -d ${{ PG_DB }} -f backup.sql
         env:
           PGPASSWORD: ${{secrests.PG_PASSWORD}}
 
@@ -22,7 +22,7 @@ jobs:
         uses: adityak74/google-drive-upload-git-action@main
         with:
           credentials: ${{ secrets.credentials }}
-          filename: "sysflow backup"
+          filename: "sysflow-backup"
           folderId: ${{ secrets.folderId }}
 
           
