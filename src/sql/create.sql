@@ -13,11 +13,11 @@ CREATE TABLE owner (
 CREATE TABLE historic_of_out (
     hout_id INTEGER GENERATED ALWAYS AS IDENTITY,
     hout_value DECIMAL(7,2) NOT NULL,
-    hout_date TIMESTAMP NOT NULL,
+    hout_date DATE DEFAULT CURRENT_DATE,
     hout_type_mov CHAR(1) NOT NULL,
     own_id INTEGER NOT NULL,
     CONSTRAINT hout_id PRIMARY KEY (hout_id),
-    FOREIGN KEY (own_id) REFERENCES owner(own_id) ON DELETE CASCADE
+    FOREIGN KEY (own_id) REFERENCES owner(own_id) ON DELETE RESTRICT
 );
 
 CREATE TABLE camera (
@@ -31,7 +31,7 @@ CREATE TABLE company (
     com_id INTEGER GENERATED ALWAYS AS IDENTITY,
     com_name VARCHAR(60) NOT NULL UNIQUE,
     com_cnpj VARCHAR(18) NOT NULL UNIQUE,
-    com_start_date DATE NOT NULL,
+    com_start_date DATE DEFAULT CURRENT_DATE NOT NULL,
     com_active BOOLEAN DEFAULT true,
     com_country CHAR(3) NOT NULL,
     CONSTRAINT com_id PRIMARY KEY (com_id)
@@ -56,7 +56,7 @@ CREATE TABLE fluor (
     fluor_id INTEGER GENERATED ALWAYS AS IDENTITY,
     bui_id INTEGER NOT NULL,
     CONSTRAINT fluor_id PRIMARY KEY (fluor_id),
-    FOREIGN KEY (bui_id) REFERENCES building(bui_id) ON DELETE CASCADE
+    FOREIGN KEY (bui_id) REFERENCES building(bui_id) ON DELETE RESTRICT
 );
 
 CREATE TABLE elevator (
@@ -68,7 +68,7 @@ CREATE TABLE elevator (
     ele_amount_maintenance INTEGER,
     bui_id INTEGER NOT NULL,
     CONSTRAINT ele_id PRIMARY KEY (ele_id),
-    FOREIGN KEY (bui_id) REFERENCES building(bui_id) ON DELETE CASCADE
+    FOREIGN KEY (bui_id) REFERENCES building(bui_id) ON DELETE RESTRICT
 );
 
 CREATE TABLE employee (
@@ -86,7 +86,7 @@ CREATE TABLE employee (
 
 CREATE TABLE camera_employee (
     cem_id INTEGER GENERATED ALWAYS AS IDENTITY,
-    cem_date DATE NOT NULL,
+    cem_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     cam_id INTEGER NOT NULL,
     emp_id INTEGER NOT NULL,
     CONSTRAINT cem_id PRIMARY KEY (cem_id),
@@ -101,12 +101,12 @@ CREATE TABLE ratchat (
     rat_price DECIMAL(5,2) NOT NULL,
     bui_id INTEGER NOT NULL,
     CONSTRAINT rat_id PRIMARY KEY (rat_id),
-    FOREIGN KEY (bui_id) REFERENCES building(bui_id) ON DELETE CASCADE
+    FOREIGN KEY (bui_id) REFERENCES building(bui_id) ON DELETE RESTRICT
 );
 
 CREATE TABLE elevator_fluor (
     efl_id INTEGER GENERATED ALWAYS AS IDENTITY,
-    efl_date_hour TIMESTAMP,
+    efl_date_hour TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     ele_id INTEGER NOT NULL,
     fluor_id INTEGER NOT NULL,
     CONSTRAINT efl_id PRIMARY KEY (efl_id),
@@ -116,7 +116,7 @@ CREATE TABLE elevator_fluor (
 
 CREATE TABLE company_fluor (
     cfl_id INTEGER GENERATED ALWAYS AS IDENTITY,
-    cfl_start_date DATE NOT NULL,
+    cfl_start_date DATE DEFAULT CURRENT_DATE NOT NULL,
     cfl_final_date DATE,
     com_id INTEGER NOT NULL,
     fluor_id INTEGER NOT NULL,
@@ -127,7 +127,7 @@ CREATE TABLE company_fluor (
 
 CREATE TABLE employee_ratchat (
     era_id INTEGER GENERATED ALWAYS AS IDENTITY,
-    era_date DATE NOT NULL,
+    era_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     emp_id INTEGER NOT NULL,
     rat_id INTEGER NOT NULL,
     CONSTRAINT era_id PRIMARY KEY (era_id),
@@ -142,7 +142,7 @@ CREATE TABLE maintenance (
     mai_id INTEGER GENERATED ALWAYS AS IDENTITY,
     mai_description TEXT,
     mai_total_price DECIMAL(5,2),
-    mai_start_date DATE NOT NULL,
+    mai_start_date DATE DEFAULT CURRENT_DATE NOT NULL,
     mai_date_prevision DATE,
     mai_status CHAR(1) NOT NULL,
     mai_id_equipment INTEGER NOT NULL,
@@ -154,7 +154,7 @@ CREATE TABLE maintenance (
 CREATE TABLE balanco (
     bal_id INTEGER GENERATED ALWAYS AS IDENTITY,
     bal_amount_pay DECIMAL(7,2) NOT NULL,
-    bal_date TIMESTAMP NOT NULL,
+    bal_date DATE DEFAULT CURRENT_DATE NOT NULL,
     man_id INTEGER NOT NULL,
     own_id INTEGER NOT NULL,
     CONSTRAINT bal_id PRIMARY KEY (bal_id),

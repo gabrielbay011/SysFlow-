@@ -8,6 +8,7 @@ class Conection:
         self.__password=password
         self.__host=host
         self.__port=port
+
     def to_conect(self):
         try:
             conn = psycopg2.connect(

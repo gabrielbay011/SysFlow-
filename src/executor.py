@@ -1,10 +1,8 @@
-import psycopg2.errors
-
 from conn import Conection
 
 class Executor:
     def __init__(self, file):
-        self.conection = Conection("yegiwntixbsumitogtkt", "postgres", "3002Grs$0604", "yegiwntixbsumitogtkt.db.sa-east-1.nhost.run" , 5432)
+        self.conection = conn
         self.conn = self.conection.to_conect()
         self.cursor = self.conn.cursor()
         self.__file = file
@@ -57,7 +55,5 @@ class Executor:
             if command.strip():
                 self.cursor.execute(command + ';')
 
-e = Executor("sql/views.sql")
-print(e.to_run())
 
 

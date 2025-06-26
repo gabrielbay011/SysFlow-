@@ -26,3 +26,19 @@ class Building:
     photo: str
     owner: Owner
     company: Company
+
+@dataclass
+class Employee:
+    name: str
+    last_name: str
+    cpf: str
+    photo: str
+    phone_number: str
+    company: Company
+
+@dataclass
+class Ratchet:
+    tag: str
+    price_maintenance: float
+    building: Building
+
