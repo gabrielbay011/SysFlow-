@@ -1,4 +1,4 @@
-from src.models.datas import Owner, Company, Building
+from src.models.datas import Owner, Company, Building, Employee, Ratchet
 from faker import Faker
 import random
 
@@ -26,14 +26,26 @@ class Generator:
             random.uniform(500.00, 600000.00),
             f"{random.randint(10000, 99999)}.jpg",
             id_owner,
-            id_company)
+            id_company
+        )
+
+    def to_generate_employee(self, id_company):
+        return Employee(
+            self.fake.name(),
+            self.fake.last_name(),
+            self.fake.cpf(),
+            f"{random.randint(10000, 99999)}.jpg",
+            self.fake.phone_number(),
+            id_company
+        )
+
+    def to_generate_ratchet(self, id_building):
+        return Ratchet(
+            str(self.fake.word()),
+            random.uniform(500.00, 1800.00),
+            id_building
+        )
 
 
 
-g = Generator()
-pessoa1 = g.to_generate_owner()
-empresa1 = g.to_generate_company()
-print("Commitando no banco de dados ")
-predio1 = g.to_generate_building(id(empresa1), id(pessoa1))
-print(predio1)
 
