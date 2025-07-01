@@ -1,0 +1,3 @@
+[submodule "libs/mfe-auth"]
+	path = libs/mfe-auth
+	url = https://github.com/gabrielbay011/mfe-auth-

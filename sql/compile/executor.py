@@ -9,8 +9,7 @@ class Executor:
         self.__file = file
 
     def to_run(self):
-        if "sql/create" in  self.__file: exe = self.__to_create()
-        elif "sql/alter" in self.__file: exe = self.__to_alter()
+        if "base/" or "checks/" or "functions/" in  self.__file: exe = self.__to_create()
         elif  "sql/views" in self.__file: exe = self.__to_consulte()
         else: exe = "No data"
         return exe
