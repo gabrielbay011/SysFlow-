@@ -1,8 +1,9 @@
-from conn import Conection
+from sql.compile.conn import Conection
+import psycopg2
 
 class Executor:
-    def __init__(self, file):
-        self.conection = conn
+    def __init__(self, file, host, dbname, port, user, password):
+        self.conection = Conection(dbname=dbname, user=user, password=password, host=host, port=port)
         self.conn = self.conection.to_conect()
         self.cursor = self.conn.cursor()
         self.__file = file
@@ -11,6 +12,7 @@ class Executor:
         if "sql/create" in  self.__file: exe = self.__to_create()
         elif "sql/alter" in self.__file: exe = self.__to_alter()
         elif  "sql/views" in self.__file: exe = self.__to_consulte()
+        else: exe = "No data"
         return exe
 
     def __to_create(self):
@@ -30,10 +32,6 @@ class Executor:
             return "Tabela já criada, verifique se o arquivo já não foi rodado alguma vez"
 
     def __to_consulte(self):
-        """
-        Method private for to consult the database
-        :return: data or error
-        """
         try:
             self.__execute(f"sql/views/{self.__file}")
             data = self.cursor.fetchall()
@@ -43,10 +41,6 @@ class Executor:
 
 
     def __to_alter(self):
-        """
-        Method private for to alter the database
-        :return: Message sucess or Error
-        """
         pass
 
     def __execute(self, file):

@@ -1,4 +1,4 @@
-from src.models.datas import Owner, Company, Building, Employee, Ratchet
+from simulator.models.datas import Owner, Company, Building, Employee, Ratchet
 from faker import Faker
 import random
 

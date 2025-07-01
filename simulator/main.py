@@ -1,6 +1,5 @@
-from service.generator import Generator
-import psycopg2
-from conn import Conection
+from simulator.service.generator import Generator
+from sql.compile.conn import Conection
 from dotenv import load_dotenv
 import os
 
