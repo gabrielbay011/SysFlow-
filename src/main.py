@@ -1,8 +1,15 @@
 from service.generator import Generator
 import psycopg2
 from conn import Conection
-conection = Conection("luaqljfdvxwhlwetkjpi", "postgres", "3002Grs$0604", "luaqljfdvxwhlwetkjpi.db.sa-east-1.nhost.run" , 5432).to_conect()
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+conection = Conection(os.getenv("DB_NAME"), os.getenv("DB_USER"), os.getenv("DB_PASSWORD"), os.getenv("DB_HOST") , (os.getenv("DB_PORT"))).to_conect()
 cur = conection.cursor()
+
+
 
 g = Generator()
 owner = g.to_generate_owner()
