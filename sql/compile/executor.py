@@ -9,7 +9,7 @@ class Executor:
         self.__file = file
 
     def to_run(self):
-        if "base/" or "checks/" or "functions/" in  self.__file: exe = self.__to_create()
+        if "base/" or "checks/" or "functions/" or "config/" in  self.__file: exe = self.__to_create()
         elif  "sql/views" in self.__file: exe = self.__to_consulte()
         else: exe = "No data"
         return exe
@@ -30,6 +30,9 @@ class Executor:
         except psycopg2.errors.DuplicateTable:
             return "Tabela já criada, verifique se o arquivo já não foi rodado alguma vez"
 
+        except Exception as e:
+            print(e)
+
     def __to_consulte(self):
         try:
             self.__execute(f"sql/views/{self.__file}")
@@ -43,6 +46,11 @@ class Executor:
         pass
 
     def __execute(self, file):
+        """
+        Method create to execute a script sql, using methods of strip and split in strings
+        :param file: path of file in directory
+        :return:
+        """
         with open(file, "r") as file_sql: script = file_sql.read()
         for command in script.strip().split(";"):
             if command.strip():

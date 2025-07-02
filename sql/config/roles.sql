@@ -1,0 +1,33 @@
+DROP ROLE IF EXISTS sysflow_user;
+DROP ROLE IF EXISTS sysflow_no_user;
+DROP ROLE IF EXISTS sysflow_test_user;
+DROP ROLE IF EXISTS syflow_backup;
+DROP ROLE IF EXISTS sysflow_maintenance;
+DROP ROLE IF EXISTS usr_no_user;
+DROP ROLE IF EXISTS usr_user;
+DROP ROLE IF EXISTS usr_test_user;
+DROP ROLE IF EXISTS usr_backup;
+
+
+CREATE ROLE syflow_backup WITH PASSWORD '' LOGIN NOINHERIT;
+
+CREATE ROLE sysflow_maintenance WITH
+    NOLOGIN
+    NOINHERIT;
+
+CREATE ROLE sysflow_user WITH
+    NOLOGIN
+    NOINHERIT;
+
+CREATE ROLE sysflow_no_user WITH
+    NOLOGIN
+    NOINHERIT;
+
+CREATE ROLE sysflow_test_user WITH
+    NOLOGIN
+    NOINHERIT;
+
+
+CREATE ROLE usr_test_user WITH PASSWORD '' LOGIN NOINHERIT;
+CREATE ROLE usr_no_user WITH PASSWORD '' LOGIN NOINHERIT;
+CREATE ROLE usr_user WITH PASSWORD '${DB_PASSWORD}' LOGIN NOINHERIT; --2025@bay
