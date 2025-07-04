@@ -18,7 +18,3 @@ GRANT USAGE
     ON SCHEMA sys_flow
     TO sysflow_user;
 
-GRANT INSERT
-    ()
-    ON
-    TO

@@ -4,9 +4,10 @@ import random
 
 fake = Faker("pt-BR")
 
+
 class Generator:
 
-    def __init__(self):
+    def __init__(self, ):
         self.fake = Faker("pt-BR")
 
 
@@ -45,6 +46,12 @@ class Generator:
             random.uniform(500.00, 1800.00),
             id_building
         )
+
+
+
+
+
+
 
 
 

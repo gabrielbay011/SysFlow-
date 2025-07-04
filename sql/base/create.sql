@@ -1,7 +1,6 @@
 CREATE TABLE sys_flow.owner (
     own_id INTEGER GENERATED ALWAYS AS IDENTITY,
-    own_name VARCHAR(28) NOT NULL CHECK (char_length(own_name) > 2),
-    own_last_name VARCHAR(60) NOT NULL CHECK (char_length(own_last_name) > 2),
+    own_last_name VARCHAR(60) NOT NULL,
     own_value DECIMAL(7,2) NOT NULL,
     own_cpf VARCHAR(14) NOT NULL,
     own_email VARCHAR(60) NOT NULL,
@@ -25,22 +24,23 @@ CREATE TABLE sys_flow.company (
     com_name VARCHAR(60) NOT NULL UNIQUE,
     com_cnpj VARCHAR(18) NOT NULL UNIQUE,
     com_start_date DATE DEFAULT CURRENT_DATE NOT NULL,
-    com_active BOOLEAN DEFAULT true,
-    com_country CHAR(3) NOT NULL,
+    com_active BOOLEAN DEFAULT TRUE,
+    com_country CHAR(3) NOT NULL DEFAULT 'BRA',
     CONSTRAINT com_id PRIMARY KEY (com_id)
 );
 
 CREATE TABLE sys_flow.building (
     bui_id INTEGER GENERATED ALWAYS AS IDENTITY,
-    bui_uf CHAR(2) NOT NULL,
-    bui_city VARCHAR(48) NOT NULL,
-    bui_district VARCHAR(48),
-    bui_street VARCHAR(60) NOT NULL,
-    bui_yield DECIMAL(8,2),
-    bui_photo TEXT,
-    bui_number INTEGER NOT NULL,
-    com_id INTEGER NOT NULL,
+    bui_name VARCHAR(48) NOT NULL UNIQUE,
+    bui_uf CHAR(2) NULL,
+    bui_city VARCHAR(48) NULL,
+    bui_district VARCHAR(48) NULL,
+    bui_street VARCHAR(48) NULL,
+    bui_number INTEGER NULL,
+    bui_yield DECIMAL(8,2) NULL,
+    bui_photo TEXT NULL,
     own_id INTEGER NOT NULL,
+    com_id INTEGER NOT NULL,
     CONSTRAINT bui_id PRIMARY KEY (bui_id),
     FOREIGN KEY (com_id) REFERENCES sys_flow.company(com_id) ON DELETE RESTRICT,
     FOREIGN KEY (own_id) REFERENCES sys_flow.owner(own_id) ON DELETE RESTRICT
@@ -142,6 +142,6 @@ CREATE TABLE sys_flow.ass_point_of_stopover(
     ele_id INTEGER NOT NULL,
     fluor_id INTEGER NOT NULL,
     CONSTRAINT poi_id PRIMARY KEY (poi_id),
-    FOREIGN KEY (ele_id) REFERENCES sys_flow.elevator(ele_id),
-    FOREIGN KEY (fluor_id) REFERENCES sys_flow.fluor(fluor_id)
+    FOREIGN KEY (ele_id) REFERENCES sys_flow.elevator(ele_id) ON DELETE CASCADE,
+    FOREIGN KEY (fluor_id) REFERENCES sys_flow.fluor(fluor_id) ON DELETE CASCADE
 );
