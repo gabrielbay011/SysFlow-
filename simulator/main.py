@@ -1,11 +1,13 @@
-from simulator.service.generator import Generator
-from sql.compile.conn import Conection
-from dotenv import load_dotenv
-import os
+import schedule
+import time
+from simulator.models.tester import Tester
 
-load_dotenv()
+obj = Tester()
 
-conection = Conection(os.getenv("DB_NAME"), os.getenv("DB_USER"), os.getenv("DB_PASSWORD"), os.getenv("DB_HOST") , (os.getenv("DB_PORT"))).to_conect()
-cur = conection.cursor()
+schedule.every(3).hours.do(obj.run)
+
+while True:
+    schedule.run_pending()
+    time.sleep(60)
 
 
