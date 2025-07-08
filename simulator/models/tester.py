@@ -1,9 +1,9 @@
-from simulator.models.database import Database
+from simulator.models.connection import Connection
 
 class Tester:
 
     def __init__(self):
-        self.__database = Database()
+        self.__database = Connection()
 
     def run(self):
-        print("Estou rodando os testes")
+        print("Estou rodando os testes ")

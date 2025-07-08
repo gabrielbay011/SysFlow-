@@ -1,28 +1,18 @@
-import psycopg2
-import os
+from simulator.models.connection import Connection
 
 class Database:
     def __init__(self):
+        self._conn = Connection().to_conect()
 
-        self.__dbname= os.getenv("DB_NAME")
-        self.__user= os.getenv("DB_USER")
-        self.__password= os.getenv("DB_PASSWORD")
-        self.__host= os.getenv("DB_HOST")
-        self.__port= os.getenv("DB_PORT")
-
-    def to_conect(self):
+    def to_insert_in_company(self, name: str, cnpj: str):
+        cursor = self._conn.cursor()
         try:
-            conn = psycopg2.connect(
-                    dbname=self.__dbname,
-                    user=self.__user,
-                    password=self.__password,
-                    host=self.__host,
-                    port=self.__port
-                        )
-            return conn
+            cursor.execute("INSERT INTO  sys_flow.view_insert_t_company_r_sysflow_test_user (com_name, com_cnpj) VALUES (%s, %s);", (name, cnpj))
+            self._conn.commit()
         except Exception as e:
-                    print(e)
-        return False
-
+            print(f"Ocorreu o seguinte erro: {e}")
+        finally:
+            self._conn.close()
+            cursor.close()
 
 

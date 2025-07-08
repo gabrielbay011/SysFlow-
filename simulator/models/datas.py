@@ -24,15 +24,35 @@ class Fluor:
     _number: int
 
 
-
-
 @dataclass
 class Company:
     _name: str
     _cnpj: str
-    _country: str
-    _employees = []
-    _fluor: Fluor
+    _country = None
+    _employees = None
+    _fluor = None
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def cnpj(self):
+        return self._cnpj
+
+    @property
+    def employees(self):
+        return self._employees
+
+    @property
+    def country(self):
+        return self._country
+
+    @property
+    def fluor(self):
+        return self._fluor
+
+
 
 @dataclass
 class Equipment:
