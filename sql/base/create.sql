@@ -29,11 +29,11 @@ CREATE TABLE IF NOT EXISTS ownership.tb_building(
 	FOREIGN KEY (own_id) REFERENCES ownership.tb_owner(own_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-CREATE TABLE IF NOT EXISTS ownership.tb_fluor(
-	flu_id INTEGER GENERATED ALWAYS AS IDENTITY,
-	flu_created_at DATE DEFAULT CURRENT_DATE NOT NULL,
-	flu_end_of_contract DATE NULL,
-	flu_number INTEGER NOT NULL,
+CREATE TABLE IF NOT EXISTS ownership.tb_floor(
+	flo_id INTEGER GENERATED ALWAYS AS IDENTITY,
+	flo_created_at DATE DEFAULT CURRENT_DATE NOT NULL,
+	flo_end_of_contract DATE NULL,
+	flo_number INTEGER NOT NULL,
 	bui_id INTEGER NOT NULL,
 	com_id INTEGER NOT NULL,
 	CONSTRAINT flu_id PRIMARY KEY (flu_id),
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS equipment.tb_equipment(
 	equ_tag TEXT NOT NULL,
 	schema_ownership_flu_id INTEGER NOT NULL,
 	CONSTRAINT equ_id PRIMARY KEY (equ_id),
-	FOREIGN KEY (schema_ownership_flu_id)  REFERENCES ownership.tb_fluor(flu_id) ON DELETE RESTRICT ON UPDATE RESTRICT
+	FOREIGN KEY (schema_ownership_flo_id)  REFERENCES ownership.tb_fluor(flu_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE IF NOT EXISTS equipment.tb_capture(
