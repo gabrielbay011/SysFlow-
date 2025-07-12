@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS ownership.tb_floor(
 	flo_number INTEGER NOT NULL,
 	bui_id INTEGER NOT NULL,
 	com_id INTEGER NOT NULL,
-	CONSTRAINT flu_id PRIMARY KEY (flu_id),
+	CONSTRAINT flo_id PRIMARY KEY (flo_id),
 	FOREIGN KEY (com_id) REFERENCES ownership.tb_company ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (bui_id) REFERENCES ownership.tb_building ON DELETE RESTRICT ON UPDATE RESTRICT
 );
