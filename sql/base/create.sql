@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS ownership.tb_company(
     com_created_at DATE DEFAULT CURRENT_DATE NOT NULL,
     com_active BOOLEAN DEFAULT TRUE NOT NULL,
     com_country CHAR(3) DEFAULT 'BRA' NOT NULL,
-    com_cnpj VARCHAR(18) UNIQUE NOT NULL,
+    com_cnpj VARCHAR(18) UNIQUE NULL,
     com_name VARCHAR(60) UNIQUE NOT NULL,
     CONSTRAINT com_id PRIMARY KEY (com_id)
 );
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS ownership.tb_floor(
 	bui_id INTEGER NOT NULL,
 	com_id INTEGER NOT NULL,
 	CONSTRAINT flo_id PRIMARY KEY (flo_id),
-	FOREIGN KEY (com_id) REFERENCES ownership.tb_company ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (com_id) REFERENCES ownership.tb_company(com_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (bui_id) REFERENCES ownership.tb_building ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS equipment.tb_equipment(
 	equ_tag TEXT UNIQUE NOT NULL,
 	schema_ownership_flu_id INTEGER NOT NULL,
 	CONSTRAINT equ_id PRIMARY KEY (equ_id),
-	FOREIGN KEY (schema_ownership_flo_id)  REFERENCES ownership.tb_fluor(flu_id) ON DELETE RESTRICT ON UPDATE RESTRICT
+	FOREIGN KEY (schema_ownership_flo_id) REFERENCES ownership.tb_floor(flo_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE IF NOT EXISTS equipment.tb_capture(
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS equipment.tb_point_of_stopover(
 	ele_id INTEGER NOT NULL,
 	schema_ownership_flu_id INTEGER NOT NULL,
 	CONSTRAINT poi_id PRIMARY KEY (poi_id),
-	FOREIGN KEY (ele_id) REFERENCES equipment.elevator(ele_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+	FOREIGN KEY (ele_id) REFERENCES equipment.tb_elevator(ele_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
 	FOREIGN KEY (schema_ownership_flu_id) REFERENCES ownership.tb_fluor(flu_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
