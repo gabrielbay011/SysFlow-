@@ -52,11 +52,11 @@ CREATE TABLE IF NOT EXISTS ownership.tb_people(
 	peo_district CHAR(2) NULL,
 	peo_street TEXT NULL,
 	peo_number INTEGER NULL,
-	peo_rg VARCHAR(12) NOT NULL,
-	peo_phone_number VARCHAR(15) NOT NULL,
-	peo_photo TEXT NOT NULL,
-	peo_cpf VARCHAR(14) NOT NULL,
-	com_id INTEGER NOT NULL,
+	peo_rg VARCHAR(12) UNIQUE NOT NULL,
+	peo_phone_number VARCHAR(15) NOT NULL UNIQUE,
+	peo_photo TEXT UNIQUE NOT NULL,
+	peo_cpf VARCHAR(14) UNIQUE NOT NULL,
+	com_id INTEGER UNIQUE NOT NULL,
 	CONSTRAINT peo_id PRIMARY KEY (peo_id),
 	FOREIGN KEY (com_id) REFERENCES ownership.tb_company ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS ownership.tb_people(
 CREATE TABLE IF NOT EXISTS equipment.tb_equipment(
 	equ_id INTEGER GENERATED ALWAYS AS IDENTITY,
 	equ_type CHAR(1) NOT NULL,
-	equ_tag TEXT NOT NULL,
+	equ_tag TEXT UNIQUE NOT NULL,
 	schema_ownership_flu_id INTEGER NOT NULL,
 	CONSTRAINT equ_id PRIMARY KEY (equ_id),
 	FOREIGN KEY (schema_ownership_flo_id)  REFERENCES ownership.tb_fluor(flu_id) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS equipment.tb_equipment(
 CREATE TABLE IF NOT EXISTS equipment.tb_capture(
 	cap_id INTEGER GENERATED ALWAYS AS IDENTITY,
 	cap_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	cap_content TEXT NULL,
+	cap_content TEXT UNIQUE NULL,
 	equ_id INTEGER NOT NULL,
 	CONSTRAINT cap_id PRIMARY KEY (cap_id),
 	FOREIGN KEY (equ_id) REFERENCES equipment.tb_equipment(equ_id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS equipment.tb_token(
 	tok_id INTEGER  GENERATED ALWAYS AS IDENTITY,
 	tok_in BOOLEAN NOT NULL,
 	tok_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL ,
-	tok_content TEXT NULL,
+	tok_content TEXT UNIQUE NULL,
 	equ_id INTEGER NOT NULL,
 	schema_ownership_peo_id INTEGER NOT NULL,
 	CONSTRAINT tok_id PRIMARY KEY (tok_id),
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS equipment.tb_elevator(
 	ele_id INTEGER GENERATED ALWAYS AS IDENTITY,
 	ele_weight DECIMAL(7,2) NULL,
 	ele_risk DECIMAL(2,2) NULL,
-	ele_tag TEXT NOT NULL,
+	ele_tag TEXT UNIQUE NOT NULL,
 	schema_ownership_bui_id INTEGER NOT NULL,
 	CONSTRAINT ele_id PRIMARY KEY (ele_id),
 	FOREIGN KEY (schema_ownership_bui_id) REFERENCES ownership.tb_building(bui_id) ON DELETE CASCADE ON UPDATE CASCADE
