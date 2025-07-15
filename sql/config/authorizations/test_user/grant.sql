@@ -1,19 +1,26 @@
-GRANT SELECT ON ALL TABLES IN SCHEMA sys_flow TO sysflow_backup;
-GRANT SELECT ON ALL TABLES IN SCHEMA sys_flow TO sysflow_maintenance;
-GRANT SELECT ON ALL TABLES IN SCHEMA sys_flow TO sysflow_test_user;
+GRANT USAGE ON SCHEMA ownership TO sysflow_test_user;
 
-GRANT INSERT ON ALL TABLES IN SCHEMA sys_flow TO sysflow_test_user;
+GRANT INSERT
+    (
+        peo_name,
+        peo_last_name,
+        peo_salary,
+        peo_cep,
+        peo_uf,
+        peo_town,
+        peo_district,
+        peo_street,
+        peo_number,
+        peo_rg,
+        peo_phone,
+        peo_photo,
+        peo_cpf,
+        com_id
+    )
+    ON ownership
+    TO sysflow_test_user;
 
-REVOKE INSERT (own_id) ON sys_flow.owner FROM sysflow_test_user;
-REVOKE INSERT (mai_id) ON sys_flow.maintenance FROM sysflow_test_user;
-REVOKE INSERT (bui_id) ON sys_flow.building FROM sysflow_test_user;
-REVOKE INSERT (com_id) ON sys_flow.company FROM sysflow_test_user;
-REVOKE INSERT (fluor_id) ON sys_flow.fluor FROM sysflow_test_user;
-REVOKE INSERT (emp_id) ON sys_flow.employee FROM sysflow_test_user;
-REVOKE INSERT (cam_id) ON sys_flow.camera FROM sysflow_test_user;
-REVOKE INSERT (poi_id) ON sys_flow.ass_point_of_stopover FROM sysflow_test_user;
-REVOKE INSERT (ele_id) ON sys_flow.elevator FROM sysflow_test_user;
-REVOKE INSERT (rec_id) ON sys_flow.ass_recording_acess FROM sysflow_test_user;
-REVOKE INSERT (tape_id) ON sys_flow.ass_tape FROM sysflow_test_user;
-REVOKE INSERT (rat_id) ON sys_flow.ratchet FROM sysflow_test_user;
-REVOKE INSERT (hout_id) ON sys_flow.historic_of_out FROM sysflow_test_user;
+GRANT SELECT (peo_id) ON ownership TO sysflow_test_user;
+
+GRANT INSERT (com_name, com_cnpj) ON ownership.tb_company TO sysflow_test_user;
+GRANT SELECT (com_id) ON ownership.tb_company TO sysflow_test_user;
