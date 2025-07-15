@@ -7,7 +7,7 @@ CREATE TABLE sys_flow.historic_of_out (
     CONSTRAINT hout_id PRIMARY KEY (hout_id),
     FOREIGN KEY (own_id) REFERENCES sys_flow.owner(own_id) ON DELETE RESTRICT
 );
-
+    
 CREATE TABLE sys_flow.company (
     com_id INTEGER GENERATED ALWAYS AS IDENTITY,
     com_name VARCHAR(60) NOT NULL UNIQUE,
