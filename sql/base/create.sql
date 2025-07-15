@@ -1,14 +1,3 @@
-CREATE TABLE sys_flow.owner (
-    own_id INTEGER GENERATED ALWAYS AS IDENTITY,
-    own_last_name VARCHAR(60) NOT NULL,
-    own_value DECIMAL(7,2) NOT NULL,
-    own_cpf VARCHAR(14) NOT NULL,
-    own_email VARCHAR(60) NOT NULL,
-    own_password VARCHAR(128),
-    CONSTRAINT own_id PRIMARY KEY (own_id)
-);
-
-
 CREATE TABLE sys_flow.historic_of_out (
     hout_id INTEGER GENERATED ALWAYS AS IDENTITY,
     hout_value DECIMAL(7,2) NOT NULL,
