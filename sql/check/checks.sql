@@ -1,28 +1,36 @@
--- OWNER CHECKS
-ALTER TABLE sys_flow.owner ADD CONSTRAINT chk_own_name CHECK (char_length(own_name) > 2);
-ALTER TABLE sys_flow.owner ADD CONSTRAINT chk_own_last_name_length CHECK (char_length(own_last_name) > 2);
-ALTER TABLE sys_flow.owner ADD CONSTRAINT chk_own_cpf_format CHECK (own_cpf ~ '^\d{3}\.\d{3}\.\d{3}\-\d{2}$');
-ALTER TABLE sys_flow.owner ADD CONSTRAINT chk_own_email_format CHECK (own_email ~ '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
+ALTER TABLE ownership.tb_company
+ADD CONSTRAINT chk_com_name
+CHECK (char_length(com_name) >= 3 AND com_name <> '');
 
--- COMPANY CHECKS
-ALTER TABLE sys_flow.company ADD CONSTRAINT chk_com_cnpj_format CHECK (com_cnpj ~ '^\d{2}\.\d{3}\.\d{3}/\d{4}\-\d{2}$');
+ALTER TABLE ownership.tb_owner
+ADD CONSTRAINT chk_own_name
+CHECK (char_length(own_name) >= 3 AND own_name <> '');
 
--- BUILDING CHECKS
-ALTER TABLE sys_flow.building ADD CONSTRAINT chk_bui_city_length CHECK (char_length(bui_city) > 2);
-ALTER TABLE sys_flow.building ADD CONSTRAINT chk_bui_street_length CHECK (char_length(bui_street) > 2);
-ALTER TABLE sys_flow.building ADD CONSTRAINT chk_bui_name_lenght CHECK (char_length(bui_name) > 2)
+ALTER TABLE ownership.tb_owner
+ADD CONSTRAINT chk_own_last_name
+CHECK (char_length(own_last_name) >= 3 AND own_last_name <> '');
 
--- EMPLOYEE CHECKS
-ALTER TABLE sys_flow.employee ADD CONSTRAINT chk_emp_name_length CHECK (char_length(emp_name) > 2);
-ALTER TABLE sys_flow.employee ADD CONSTRAINT chk_emp_last_name_length CHECK (char_length(emp_last_name) > 2);
-ALTER TABLE sys_flow.employee ADD CONSTRAINT chk_emp_cpf_format CHECK (emp_cpf ~ '^\d{3}\.\d{3}\.\d{3}\-\d{2}$');
-ALTER TABLE sys_flow.employee ADD CONSTRAINT chk_emp_phone_format CHECK (emp_phone_number ~ '^\(?\d{2}\)?\s?\d{4,5}\-?\d{4}$');
+ALTER TABLE ownership.tb_owner
+ADD CONSTRAINT chk__own_cpf_format
+CHECK (own_cpf ~ '^\d{3}\.\d{3}\.\d{3}-\d{2}$');
 
--- ELEVATOR CHECK
-ALTER TABLE sys_flow.elevator ADD CONSTRAINT chk_ele_tag_length CHECK (char_length(ele_tag) = 12);
+ALTER TABLE ownership.tb_owner
+ADD CONSTRAINT chk_email_format
+CHECK (own_email ~ '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
 
--- CAMERA CHECK
-ALTER TABLE sys_flow.camera ADD CONSTRAINT chk_cam_tag_length CHECK (char_length(cam_tag) = 12);
+ALTER TABLE ownership.tb_people
+ADD CONSTRAINT chk_peo_name
+CHECK (char_length(peo_name) >= 3 AND peo_name <> '');
 
--- RATCHAT CHECK
-ALTER TABLE sys_flow.ratchat ADD CONSTRAINT chk_rat_tag_length CHECK (char_length(rat_tag) = 12);
+ALTER TABLE ownership.tb_people
+ADD CONSTRAINT chk_peo_last_name
+CHECK (char_length(peo_last_name) >= 3 AND peo_last_name <> '');
+
+ALTER TABLE ownership.tb_people
+ADD CONSTRAINT chk_peo_rg_format
+CHECK (peo_rg ~ '^\d{2}\.\d{3}\.\d{3}-[0-9Xx]$');
+
+ALTER TABLE ownership.tb_people
+ADD CONSTRAINT chk_peo_cpf_format
+CHECK (peo_cpf ~ '^\d{3}\.\d{3}\.\d{3}-\d{2}$');
+

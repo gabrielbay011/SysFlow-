@@ -11,15 +11,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Definir nome do arquivo com data e hora
+        run: |
+          TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+          echo "BACKUP_FILE=backup_${TIMESTAMP}.sql" >> $GITHUB_ENV
+
       - name: Dump SysFlow
         run: |
-          pg_dump -h ${{ secrets.PG_HOST }} -p ${{ secrets.PG_PORT }} -U ${{ secrets.PG_USER }} -d ${{ secrets.PG_DB }} -f backup.sql
+          echo "Gerando backup para $BACKUP_FILE"
+          pg_dump -h ${{ secrets.PG_HOST }} -p ${{ secrets.PG_PORT }} -U ${{ secrets.PG_USER }} -d ${{ secrets.PG_DB }} -f "$BACKUP_FILE"
         env:
           PGPASSWORD: ${{ secrets.PG_PASSWORD }}
 
-      - name: Upload to gdrive
+      - name: Verificar arquivo criado
+        run: ls -lh
+
+      - name: Upload to Google Drive
         uses: adityak74/google-drive-upload-git-action@main
         with:
           credentials: ${{ secrets.credentials }}
-          filename: "grant.sql"
+          filename: "${{ env.BACKUP_FILE }}"
           folderId: ${{ secrets.folderId }}
