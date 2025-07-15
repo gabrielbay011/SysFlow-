@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS ownership.tb_people(
 	peo_id INTEGER GENERATED ALWAYS AS IDENTITY,
 	peo_name VARCHAR(28) NOT NULL,
 	peo_last_name TEXT NOT NULL,
-	peo_salario DECIMAL(8,2) NULL,
+	peo_salary DECIMAL(8,2) NULL,
 	peo_cep VARCHAR(9) NULL,
 	peo_uf VARCHAR(48) NULL,
 	peo_town VARCHAR(48) NULL,
