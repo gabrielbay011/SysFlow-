@@ -5,6 +5,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Connection:
+    """
+    Class to connect to a database remotely
+    Responsibility: Separate logic involving the database from the connection
+    """
     def __init__(self):
 
         self.__dbname= os.getenv("DB_NAME")

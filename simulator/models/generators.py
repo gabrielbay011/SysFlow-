@@ -22,4 +22,3 @@ class GeneratorCompany(Task):
 
     def to_generate_data(self):
         return Company(self._fk.company(), self._fk.cnpj())
-

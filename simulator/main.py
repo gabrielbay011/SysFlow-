@@ -1,19 +1,16 @@
 import schedule
 import time
-from simulator.models.factory import Factory
 from simulator.models.generators import GeneratorCompany
-from simulator.models.database import Database
+from simulator.models.database import DBExecute
 
-obj = Factory()
-g = GeneratorCompany()
 
-db = Database()
+g_company = GeneratorCompany()
 
-company  = obj.run(g)
-name = company.name
-cnpj = company.cnpj
-print(f"Nome: {(name)} Cnpj: {cnpj}")
-schedule.every(1).minutes.do(lambda: db.to_insert_in_company(str(name), str(cnpj)))
+db = DBExecute()
+
+company  = factory.create(g_company)
+
+schedule.every(1).minutes.do(lambda: db.to_insert_in_company(company.name, company.cnpj))
 
 if __name__ == "__main__":
     while True:

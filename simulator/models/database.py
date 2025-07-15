@@ -1,6 +1,10 @@
 from simulator.models.connection import Connection
 
-class Database:
+class DBExecute:
+    """
+    This class is to execute all operations in database
+    Responsibility: Make all connections that need to use the database
+    """
     def __init__(self):
         self._conn = Connection().to_conect()
 

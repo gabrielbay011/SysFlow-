@@ -1,4 +1,9 @@
 venv/
+<<<<<<< HEAD
 .env
 .gitmodules
 .idea
+=======
+.idea/
+.env
+>>>>>>> c5e4757 (update of gitignore)
