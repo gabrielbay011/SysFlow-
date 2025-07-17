@@ -12,8 +12,8 @@ class Connection:
     def __init__(self):
 
         self.__dbname= os.getenv("DB_NAME")
-        self.__user= os.getenv("DB_TEST_USER")
-        self.__password= os.getenv("DB_TEST_PASSWORD")
+        self.__user= os.getenv("DB_USER")
+        self.__password= os.getenv("DB_PASSWORD")
         self.__host= os.getenv("DB_HOST")
         self.__port= os.getenv("DB_PORT")
 
@@ -28,8 +28,8 @@ class Connection:
                         )
             return conn
         except Exception as e:
-                    print(e)
-
+            print(self.__host, self.__port, self.__user, self.__dbname)
+            print(e)
         return False
 
 

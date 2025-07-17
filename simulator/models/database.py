@@ -1,22 +1,18 @@
 from simulator.models.connection import Connection
 
-class DBExecute:
-    """
-    This class is to execute all operations in database
-    Responsibility: Make all connections that need to use the database
-    """
+class Database:
+
     def __init__(self):
         self._conn = Connection().to_conect()
 
-    def to_insert_in_company(self, name: str, cnpj: str):
+    def send_company(self, name, cnpj):
         cursor = self._conn.cursor()
         try:
-            cursor.execute("INSERT INTO  sys_flow.view_insert_t_company_r_sysflow_test_user (com_name, com_cnpj) VALUES (%s, %s);", (name, cnpj))
+            cursor.execute("SELECT ownership.f_company_t_test_user(%s, %s);", (name, cnpj))
             self._conn.commit()
         except Exception as e:
             print(f"Ocorreu o seguinte erro: {e}")
+            self._conn.rollback()
         finally:
             self._conn.close()
             cursor.close()
-
-

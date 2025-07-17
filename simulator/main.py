@@ -1,18 +1,8 @@
-import schedule
-import time
-from simulator.models.generators import GeneratorCompany
-from simulator.models.database import DBExecute
-
-
-g_company = GeneratorCompany()
-
-db = DBExecute()
-
-company  = factory.create(g_company)
-
-schedule.every(1).minutes.do(lambda: db.to_insert_in_company(company.name, company.cnpj))
+from simulator.service.agent import Agent
 
 if __name__ == "__main__":
-    while True:
-        schedule.run_pending()
-        time.sleep(60)
+
+    time_in = input("Digite em quanto tempo deseja para criar dados")
+    time_out = input("Digite a hora para subir os dados")
+    agent = Agent()
+    agent.start(int(time_in), int(time_out))
