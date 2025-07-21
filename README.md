@@ -56,7 +56,10 @@ Atributos que possuem a notação (PRESET DEFAULT algum_valor) são atributos qu
 
 Observação: não está sendo aplicada a trigramação para tabelas de outros schemas, como users, files e tenants. Exemplo: rs_users_to_fav.
 
-SOBRE O BRMODELO
+--- 
+
+## SOBRE O BRMODELO
+
 Abaixo, seguem algumas orientações sobre o BRModelo para facilitar a compreensão da modelagem:
 
 O BRModelo representa chaves primárias com um ícone de chave preta. Além disso, elas sempre são o primeiro atributo de uma tabela;
