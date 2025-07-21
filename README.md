@@ -1,12 +1,12 @@
 # SysFlow
 
-# PADRONIZAÇÕES DO PROJETO
+## PADRONIZAÇÕES DO PROJETO
 ---
 
 Este documento aborda as documentações e os padrões utilizados para o desenvolvimento do projeto de banco de dados do SysFlow.
 
 --- 
-SOBRE AS DOCUMENTAÇÕES
+## SOBRE AS DOCUMENTAÇÕES
 
 Todas as documentações estão armazenadas no Git Hub dentro da pasta docs.
 
@@ -23,7 +23,7 @@ Todas as documentações se complementam. Caso haja alteração em alguma delas,
 Este documento aborda tópicos gerais, mas ele concentra mais informações sobre a documentação do modelo lógico, isso porque as especificações das outras documentações estão descritas em seus próprios arquivos, coisa que não é possível fazer com o arquivo do modelo lógico.
 
 --- 
-# SOBRE A MODELAGEM
+## SOBRE A MODELAGEM
 
 
 A linguagem da modelagem é o idioma inglês;
