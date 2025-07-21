@@ -7,6 +7,7 @@ Este documento aborda as documentações e os padrões utilizados para o desenvo
 
 --- 
 SOBRE AS DOCUMENTAÇÕES
+
 Todas as documentações estão armazenadas no Git Hub dentro da pasta docs.
 
 Existe dois arquivo brmodelos dentro da pasta docs e duas imagens correspondente aos modelos.
